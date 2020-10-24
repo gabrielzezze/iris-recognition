@@ -6,10 +6,11 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-g6-iris-recognition = "*"
 pytest-shutil = "*"
 opencv-python = "*"
 numpy = "*"
+scikit-image = "*"
+imutils = "*"
 
 [requires]
 python_version = "3.7"
