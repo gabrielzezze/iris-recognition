@@ -10,6 +10,7 @@ from G6_iris_recognition.feature_vec import *
 
 def iris_test_model(train_db_path,train_db_model_path):
     directory_list = list()
+    blacklist_files = []
     for root, dirs, files in os.walk(
             train_db_path,
             topdown=False):
@@ -36,12 +37,14 @@ def iris_test_model(train_db_path,train_db_model_path):
             iris_encodings_in_image = engroup(path_to_image)
             if iris_encodings_in_image=="invalid image":
                 invalid_image=True
+                blacklist_files.append(f'{directory}/{path_to_file}')
             # face_encodings_in_image = get_face_encodings(path_to_image)
 
             iris_encodings.append(iris_encodings_in_image)
         if invalid_image == True :    
             print("invalid_image",name)
             invalid_image=False
+            
         else:
             iris_names.append(name)     
             iris_name_encodings.append(iris_encodings)
@@ -57,7 +60,7 @@ def iris_test_model(train_db_path,train_db_model_path):
     f.write(pickle.dumps(data))
     f.close()
     print ("OK")
-    return iris_names
+    return iris_names, blacklist_files
 
 
 
